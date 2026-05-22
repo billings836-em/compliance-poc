@@ -1,0 +1,11 @@
+SAMPLE COMPLIANCE TEST DOCUMENT
+================================
+
+Paragraph 1:
+The firm's trading activity in Q4 exceeded internal risk thresholds by a margin of 12%, triggering mandatory review under Section 4.2 of the Risk Policy Framework. All positions were closed within the prescribed window. [Source: Risk Policy Framework, Section 4.2]
+
+Paragraph 2:
+Client onboarding procedures were updated in March to align with the revised AML guidelines issued by the regulator. Staff training was completed across all front-office teams before the effective date. No exceptions were recorded during the transition period.
+
+Paragraph 3:
+Counterparty exposure limits were reviewed quarterly and found to be within approved bands for all monitored entities. The review methodology follows the standardised approach outlined in the Basel III capital framework. [Source: Basel III Capital Framework, BCBS 2017]
