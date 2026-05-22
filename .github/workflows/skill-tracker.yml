@@ -1,0 +1,54 @@
+name: Skill Version Tracker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'SKILL.md'
+
+jobs:
+  log-skill-update:
+    name: Log SKILL.md update
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Extract version from SKILL.md
+        id: version
+        run: |
+          VERSION=$(grep '_Last updated:' SKILL.md | sed 's/.*_Last updated: //' | sed 's/ —.*//')
+          FLAG=$(grep 'flag:' SKILL.md | sed 's/.*flag: //' | sed 's/_//')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "flag=$FLAG" >> $GITHUB_OUTPUT
+
+      - name: Print skill update summary
+        run: |
+          echo "================================================"
+          echo "  SKILL.md updated on $(date -u '+%Y-%m-%d %H:%M UTC')"
+          echo "  Version : ${{ steps.version.outputs.version }}"
+          echo "  Flag    : ${{ steps.version.outputs.flag }}"
+          echo "================================================"
+          echo ""
+          echo "Next step: Re-sync the GitHub connector in your Claude project."
+          echo "The updated SKILL.md will be picked up on the next knowledge sync."
+
+      - name: Create update summary artifact
+        run: |
+          echo "{" > skill-update.json
+          echo "  \"updated_at\": \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\"," >> skill-update.json
+          echo "  \"version\": \"${{ steps.version.outputs.version }}\"," >> skill-update.json
+          echo "  \"flag\": \"${{ steps.version.outputs.flag }}\"," >> skill-update.json
+          echo "  \"commit\": \"${{ github.sha }}\"," >> skill-update.json
+          echo "  \"pushed_by\": \"${{ github.actor }}\"" >> skill-update.json
+          echo "}" >> skill-update.json
+          cat skill-update.json
+
+      - name: Upload update summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-update-${{ github.run_number }}
+          path: skill-update.json
+          retention-days: 30
