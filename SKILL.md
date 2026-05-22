@@ -10,7 +10,7 @@ Every paragraph in the uploaded document must contain a citation. A citation is 
 - Read every paragraph in the document
 - If a paragraph does NOT contain a citation, flag it with:
 
-  🚨 NO CITATION FOUND
+  ❌  NO CITATION FOUND
 
 - Do nothing else. Do not summarise. Do not rewrite. Do not comment on content.
 
@@ -18,4 +18,4 @@ Every paragraph in the uploaded document must contain a citation. A citation is 
 List each flagged paragraph, preceded by the flag. If all paragraphs have citations, respond with: ✅ All paragraphs are cited.
 
 ---
-_Last updated: v1.1.0 — flag: 🚨_
+_Last updated: v1.1.0 — flag: ❌ _
